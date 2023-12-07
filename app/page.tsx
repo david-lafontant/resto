@@ -1,9 +1,10 @@
-import Image from 'next/image'
+import { prisma } from '@/lib/prisma';
 
-export default function Home() {
+export default async function Home() {
+  const user = await prisma.user.findFirst();
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Hello world!</h1>
+      <h1>Hello, {user?.name}</h1>
     </main>
-  )
+  );
 }
