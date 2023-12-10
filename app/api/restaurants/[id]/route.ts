@@ -38,6 +38,20 @@ export async function PUT(request: Request, {params}:{params: {id: string}}){
   return NextResponse.json(updated)
 }
 
+export async function PATCH(request: Request, {params}:{params: {id: string}}){
+  const id = params.id;
+  const json = await request.json();
+
+  const updated = await prisma.restaurant.update({
+    where: {
+      id: parseInt(id, 10)
+    },
+    data: json
+  })
+
+  return NextResponse.json(updated)
+}
+
 
 
 
