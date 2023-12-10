@@ -11,3 +11,16 @@ export async function GET(request: Request, {params}:{params:{id:string}}) {
   return NextResponse.json(menus);
 }
 
+export async function POST(request: Request, {params}:{params:{id:string}}) {
+  const json = await request.json();
+  const created = await prisma.menu.create({
+    data: {
+      ...json,
+      restaurantId: Number(params.id)
+    
+    
+    }
+  });
+  return new NextResponse(JSON.stringify(created), { status: 201 });
+
+}
