@@ -12,7 +12,7 @@ async function main() {
     update: {},
   });
   console.log({ user });
-  const restaurant = await prisma.restaurant.createMany({
+  const restaurants = await prisma.restaurant.createMany({
     data:[
       {
         "name": "Savory Bites",
@@ -66,7 +66,62 @@ async function main() {
       }
     ]
   })
-  console.log('Created restaurants: ', restaurant.count)
+  console.log('Created restaurants: ', restaurants.count);
+  const menus = await prisma.menu.createMany({
+    data: [
+      {"restaurantId": 1,
+        "name": "Breakfast",
+        "description": "Start your day with a delicious and hearty breakfast, featuring a variety of morning delights."
+      },
+      {
+        "restaurantId": 1,
+        "name": "Lunch",
+        "description": "Satisfy your midday cravings with our diverse lunch menu, offering a range of flavorful options."
+      },
+      {
+        "restaurantId": 1,
+        "name": "Dinner",
+        "description": "Indulge in a delightful dinner experience, where our chefs have crafted a menu of exquisite dishes."
+      },
+      {
+        "restaurantId": 1,
+        "name": "Brunch",
+        "description": "Combine the best of breakfast and lunch with our brunch menu, perfect for a leisurely weekend meal."
+      },
+      {
+        "restaurantId": 1,
+        "name": "Happy Hour",
+        "description": "Join us for happy hour and enjoy specially crafted drinks and appetizers at discounted prices."
+      },
+      {
+        "restaurantId": 1,
+        "name": "Dessert",
+        "description": "End your meal on a sweet note with our tempting dessert menu, featuring decadent treats for every palate."
+      },
+      {
+        "restaurantId": 1,
+        "name": "Vegetarian Delights",
+        "description": "Discover the flavors of our vegetarian menu, where plant-based ingredients take center stage in every dish."
+      },
+      {
+        "restaurantId": 1,
+        "name": "Seafood Extravaganza",
+        "description": "Immerse yourself in a seafood feast with our special menu showcasing the freshest catches and culinary expertise."
+      },
+      {
+        "restaurantId": 1,
+        "name": "Cocktail Hour",
+        "description": "Unwind with style during cocktail hour, featuring a curated selection of expertly crafted cocktails."
+      },
+      {
+        "restaurantId": 1,
+        "name": "Late-Night Bites",
+        "description": "Satisfy your late-night cravings with our menu of delicious bites, perfect for a midnight snack."
+      }
+    ]}
+    
+  )
+  console.log('created menu', menus.count)
 }
 
 
