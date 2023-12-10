@@ -55,6 +55,37 @@ export async function PATCH(request: Request, {params}:{params: {id: string}}){
 
 
 
+export async function DELETE(request: Request, {params}:{params:{id:string}}){
+  const id = params.id
+  const deleted = await prisma.restaurant.delete({
+    where: {
+      id: parseInt(id, 10)
+    }
+  })
+  return NextResponse.json(deleted)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
