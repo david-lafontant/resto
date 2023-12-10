@@ -16,3 +16,49 @@ return NextResponse.json(restaurant)
 
 
 }
+
+
+
+
+export async function PUT(request: Request, {params}:{params: {id: string}}){
+  const id = params.id;
+  const json = await request.json();
+
+  const updated = await prisma.restaurant.update({
+    where: {
+      id: parseInt(id, 10)
+    },
+    data: {
+      name: json.name || null,
+      address: json.address || null,
+      description: json.description || null
+    }
+  })
+
+  return NextResponse.json(updated)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
