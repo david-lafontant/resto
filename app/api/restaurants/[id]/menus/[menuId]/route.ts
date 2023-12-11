@@ -12,3 +12,20 @@ export async function GET(request: Request, { params: { id, menuId } }: { params
   return NextResponse.json(menu)
 
 }
+
+export async function PUT(request: Request, { params: { id, menuId } }: { params: { id: string; menuId: string } }) {
+
+  const json = await request.json();
+
+  const updated = await prisma.menu.update({
+    where: {
+      id: parseInt(menuId, 10)
+    },
+    data: {
+      name: json.name || null,
+      description: json.description || null
+    }
+  })
+
+  return NextResponse.json(updated)
+}
