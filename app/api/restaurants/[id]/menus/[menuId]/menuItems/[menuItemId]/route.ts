@@ -31,3 +31,16 @@ export async function PUT(request: Request, { params: { id, menuId,menuItemId } 
 
   return NextResponse.json(updated)
 }
+
+export async function PATCH(request: Request, { params: { id, menuId,menuItemId } }: { params: { id: string; menuId: string; menuItemId:string  } }) {
+  const json = await request.json();
+
+  const updated = await prisma.menuItem.update({
+    where: {
+      id: parseInt(menuItemId, 10),
+    },
+    data: json
+  });
+
+  return NextResponse.json(updated);
+}
