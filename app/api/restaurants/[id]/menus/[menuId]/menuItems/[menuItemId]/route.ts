@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request, { params: { id, menuId,menuItemId } }: { params: { id: string; menuId: string; menuItemId:string  } }){
+export async function GET(request: Request, { params: { id, menuId, menuItemId } }: { params: { id: string; menuId: string; menuItemId: string } }) {
 
   const menuItem = await prisma.menuItem.findFirst({
     where: {
@@ -9,12 +9,11 @@ export async function GET(request: Request, { params: { id, menuId,menuItemId } 
     }
   })
 
-  return NextResponse.json(menuItem)
+  return NextResponse.json(menuItem);
 
 }
 
-
-export async function PUT(request: Request, { params: { id, menuId,menuItemId } }: { params: { id: string; menuId: string; menuItemId:string  } }) {
+export async function PUT(request: Request, { params: { id, menuId, menuItemId } }: { params: { id: string; menuId: string; menuItemId: string } }) {
 
   const json = await request.json();
 
@@ -32,7 +31,7 @@ export async function PUT(request: Request, { params: { id, menuId,menuItemId } 
   return NextResponse.json(updated)
 }
 
-export async function PATCH(request: Request, { params: { id, menuId,menuItemId } }: { params: { id: string; menuId: string; menuItemId:string  } }) {
+export async function PATCH(request: Request, { params: { id, menuId, menuItemId } }: { params: { id: string; menuId: string; menuItemId: string } }) {
   const json = await request.json();
 
   const updated = await prisma.menuItem.update({
@@ -43,4 +42,13 @@ export async function PATCH(request: Request, { params: { id, menuId,menuItemId 
   });
 
   return NextResponse.json(updated);
+}
+
+export async function DELETE(request: Request, { params: { id, menuId, menuItemId } }: { params: { id: string; menuId: string; menuItemId: string } }) {
+  const deleted = await prisma.menuItem.delete({
+    where: {
+      id: parseInt(menuItemId, 10),
+    },
+  });
+  return NextResponse.json(deleted);
 }
