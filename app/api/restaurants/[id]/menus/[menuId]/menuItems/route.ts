@@ -15,4 +15,18 @@ export async function GET(request: Request, { params: { id, menuId } }: { params
 
 }
 
+export async function POST(request: Request, { params: { id, menuId } }: { params: { id: string; menuId: string } }) {
+  const json = await request.json();
+  const created = await prisma.menuItem.create({
+    data: {
+      ...json,
+      menuId: parseInt(menuId,10)
+
+
+    }
+  });
+  return new NextResponse(JSON.stringify(created), { status: 201 });
+
+}
+
 
