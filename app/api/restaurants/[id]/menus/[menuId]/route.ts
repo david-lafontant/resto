@@ -43,3 +43,13 @@ export async function PATCH(request: Request, { params: { id, menuId } }: { para
   
   return NextResponse.json(updated);
 }
+
+
+export async function DELETE(request: Request, { params: { id, menuId } }: { params: { id: string; menuId: string } }) {
+  const deleted = await prisma.menu.delete({
+    where: {
+      id: parseInt(menuId, 10),
+    },
+  });
+  return NextResponse.json(deleted);
+}
